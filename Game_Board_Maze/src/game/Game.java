@@ -30,7 +30,7 @@ public class Game implements Runnable {
 
     //този метод се пишат всички  обекти,който ще работчт в играта
     public void init() {
-        this.display = new Display(this.title, this.width, this.hight);
+        display = new Display(this.title, this.width, this.hight);
 
     }
 
@@ -48,7 +48,7 @@ public class Game implements Runnable {
         //начина,по които се рисува
         this.g = this.bs.getDrawGraphics();
 
-        BufferedImage img = ImageLoader.loadImage("/images.background.jpg");
+        BufferedImage img = ImageLoader.loadImage("/images/background.jpg");
         this.g.drawImage(img, 0, 0, null);
         this.bs.show();
         this.g.dispose();//всичко в графиките ще визуализира
@@ -69,7 +69,7 @@ public class Game implements Runnable {
     //нишките,по който ще работи програмата
     public synchronized void start() {
 
-        if (this.isRunning = false) {
+        if (this.isRunning) {
             return;
         }
         this.isRunning = true;
@@ -78,7 +78,7 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
-        if (this.isRunning = true) {
+        if (!this.isRunning) {
             return;
         }
         this.isRunning = false;

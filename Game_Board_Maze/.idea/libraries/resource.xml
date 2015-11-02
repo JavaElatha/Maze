@@ -4,6 +4,8 @@
       <root url="file://$PROJECT_DIR$/resource" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/resource" />
+    </SOURCES>
   </library>
 </component>
