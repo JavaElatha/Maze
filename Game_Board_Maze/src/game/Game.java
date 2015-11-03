@@ -1,9 +1,7 @@
 package game;
 
 import display.Display;
-import gfx.Assets;
 import gfx.ImageLoader;
-import gfx.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -22,14 +20,6 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g; // позволява да рисуваме
 
-    private SpriteSheet spriteSheet;
-
-    private int cropWidth = 40;
-    private int cropHeight = 60;
-
-    int row;
-    int col;
-
     public Game(String title, int width, int hight) {
         this.title = title;
         this.hight = hight;
@@ -40,23 +30,12 @@ public class Game implements Runnable {
 
     //този метод се пишат всички  обекти,който ще работчт в играта
     public void init() {
-        Assets.init();
         display = new Display(this.title, this.width, this.hight);
 
-        this.spriteSheet = new SpriteSheet(Assets.player, cropWidth, cropHeight);
     }
 
     private void tick() {
 
-        col++;
-        if(col==5) {
-            row++;
-            col=0;
-
-            if(row==2) {
-                row=0;
-            }
-        }
     }
 
     private void render() {
@@ -71,12 +50,8 @@ public class Game implements Runnable {
 
         BufferedImage img = ImageLoader.loadImage("/images/background.jpg");
         this.g.drawImage(img, 0, 0, null);
-
-        this.g.drawImage(this.spriteSheet.crop(col,row), 0, 0, null);
-
         this.bs.show();
         this.g.dispose();//всичко в графиките ще визуализира
-
 
 
     }
