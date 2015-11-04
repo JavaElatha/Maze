@@ -1,7 +1,12 @@
 package display;
 
+import game.InputHandler;
+import javafx.scene.input.KeyCode;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Created by Margarita on 02-Nov-15.
@@ -10,6 +15,8 @@ public class Display extends Canvas {
     private int width;
     private int hight;
     private String title;
+
+    private InputHandler inputHandler;
 
     private JFrame frame;
     private Canvas canvas;
@@ -41,7 +48,8 @@ public class Display extends Canvas {
         canvas.setPreferredSize(new Dimension(this.width, this.hight));
         canvas.setMaximumSize(new Dimension(this.width, this.hight));
         canvas.setMinimumSize(new Dimension(this.width, this.hight));
-
+        this.inputHandler = new InputHandler(this);
+        frame.addKeyListener(inputHandler);
         frame.add(canvas);
         frame.pack(); //опакова всиюко написано до тук
     }

@@ -1,9 +1,11 @@
 package game;
 
 import display.Display;
+import game.entities.MainCharacter;
 import gfx.Assets;
 import gfx.ImageLoader;
 import gfx.SpriteSheet;
+import javafx.scene.input.KeyCode;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -21,14 +23,11 @@ public class Game implements Runnable {
 
     private BufferStrategy bs;
     private Graphics g; // позволява да рисуваме
-
-    private SpriteSheet spriteSheet;
+    public static MainCharacter player;
+    private InputHandler inputHandler;
 
     private int cropWidth = 40;
     private int cropHeight = 60;
-
-    int row;
-    int col;
 
     public Game(String title, int width, int hight) {
         this.title = title;
@@ -42,21 +41,14 @@ public class Game implements Runnable {
     public void init() {
         Assets.init();
         display = new Display(this.title, this.width, this.hight);
+        //this.inputHandler = new InputHandler(this.display);
+        player = new MainCharacter("Pesho", cropWidth, cropHeight, 100, 200);
 
-        this.spriteSheet = new SpriteSheet(Assets.player, cropWidth, cropHeight);
     }
 
     private void tick() {
+        player.tick();
 
-        col++;
-        if(col==5) {
-            row++;
-            col=0;
-
-            if(row==2) {
-                row=0;
-            }
-        }
     }
 
     private void render() {
@@ -71,9 +63,7 @@ public class Game implements Runnable {
 
         BufferedImage img = ImageLoader.loadImage("/images/background.jpg");
         this.g.drawImage(img, 0, 0, null);
-
-        this.g.drawImage(this.spriteSheet.crop(col,row), 0, 0, null);
-
+        player.render(g);
         this.bs.show();
         this.g.dispose();//всичко в графиките ще визуализира
 
@@ -83,13 +73,20 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        init();
+        this.init();
+
+
         while (isRunning) {
-            tick();
-            render();
+
+            this.render();
+            this.tick();
+
+
+
         }
         stop(); //за да се затворят всички нишки
     }
+
 
     //нишките,по който ще работи програмата
     public synchronized void start() {
@@ -106,9 +103,10 @@ public class Game implements Runnable {
         if (!this.isRunning) {
             return;
         }
-        this.isRunning = false;
         //при сливане на тредовете може да възникне грешка
+
         try {
+            this.isRunning = false;
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
