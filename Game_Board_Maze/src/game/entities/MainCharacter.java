@@ -71,8 +71,6 @@ public class MainCharacter {
             if(this.x-this.speed >= 0) {
                 this.x -= speed;
             }
-
-
         }
 
         if(isMovingUp) {
