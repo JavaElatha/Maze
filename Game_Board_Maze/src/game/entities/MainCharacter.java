@@ -1,6 +1,9 @@
 package game.entities;
 
+import display.Display;
+import game.Game;
 import game.InputHandler;
+import game.Launcher;
 import gfx.Assets;
 import gfx.SpriteSheet;
 import org.w3c.dom.css.Rect;
@@ -16,13 +19,16 @@ public class MainCharacter {
 
     private int width, height, x, y, speed;
     private int lives = 3;
+
+    private int rowMovingRight = 6;
+    private int colMovingRight = 3;
+
     public static boolean isMovingRight;
     public static boolean isMovingLeft;
     public static boolean isMovingUp;
     public static boolean isMovingDown;
 
     private Graphics g;
-
     private SpriteSheet image;
     private Rectangle contactBox;
 
@@ -38,32 +44,50 @@ public class MainCharacter {
         this.speed = 5;
         this.contactBox = new Rectangle(x, y, width, height);
         this.image = new SpriteSheet(Assets.player, width, height);
-
     }
 
     public void tick() {
         this.contactBox.setBounds(this.x, this.y, this.width, this.height);
-
         if(this.isMovingRight) {
-            this.x+=this.speed;
+
+            if(this.x+this.speed <= Launcher.game.getWidth() - this.width) {
+                this.x+=this.speed;
+            }
         }
 
         if(isMovingLeft) {
-            this.x-=speed;
+            if(this.x-this.speed >= 0) {
+                this.x -= speed;
+            }
         }
 
         if(isMovingUp) {
-            this.y-=speed;
+            if (this.y - this.speed >= 0) {
+                this.y -= speed;
+            }
         }
 
         if(isMovingDown){
-            this.y +=speed;
+            if (this.y + this.speed <= Launcher.game.getHeight() - this.height) {
+                this.y += speed;
+            }
         }
-    }
+
+        if(isMovingRight) {
+
+            colMovingRight++;
+
+            if(colMovingRight>=6) {
+                colMovingRight = 3;
+                }
+            }
+        }
+
 
     public void render(Graphics g) {
 
-        g.drawImage(this.image.crop(0, 0), this.x, this.y, null);
+        g.drawImage(this.image.crop(colMovingRight, rowMovingRight), this.x, this.y, null);
+
     }
 
     public boolean contactEnemy (Rectangle badGuy) {
