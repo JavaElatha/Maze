@@ -87,35 +87,24 @@ public class Game implements Runnable {
     public void run() {
         this.init();
 
-        //Sets the frames per seconds
+
         int fps = 15;
-        //1 000 000 000 nanoseconds in a second. Thus we measure time in nanoseconds
-        //to be more specific. Maximum allowed time to run the tick() and render() methods
         double timePerTick = 1_000_000_000.0 / fps;
-        //How much time we have until we need to call our tick() and render() methods
         double delta = 0;
-        //The current time in nanoseconds
         long now;
-        //Returns the amount of time in nanoseconds that our computer runs.
         long lastTime = System.nanoTime();
         long timer = 0;
         int ticks = 0;
 
         while (isRunning) {
-            //Sets the now variable to the current time in nanoseconds
             now = System.nanoTime();
-            //Amount of time passed divided by the max amount of time allowed.
             delta += (now-lastTime) / timePerTick;
-            //Adding to the timer the time passed
             timer += now - lastTime;
-            //Setting the lastTime with the values of now time after we have calculated the delta
             lastTime = now;
 
-            //If enough time has passed we need to tick() and render() to achieve 60 fps
             if (delta >= 1) {
                 tick();
                 render();
-                //Reset the delta
                 ticks++;
                 delta--;
             }

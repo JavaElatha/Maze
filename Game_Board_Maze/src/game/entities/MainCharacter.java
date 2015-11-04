@@ -20,8 +20,20 @@ public class MainCharacter {
     private int width, height, x, y, speed;
     private int lives = 3;
 
+    private int row = 4;
+    private int col = 3;
+
     private int rowMovingRight = 6;
     private int colMovingRight = 3;
+
+    private int rowMovingLeft = 5;
+    private int colMovingLeft = 3;
+
+    private int rowMovingUp = 7;
+    private int colMovingUp = 3;
+
+    private int rowMovingDown = 4;
+    private int colMovingDown = 3;
 
     public static boolean isMovingRight;
     public static boolean isMovingLeft;
@@ -59,6 +71,8 @@ public class MainCharacter {
             if(this.x-this.speed >= 0) {
                 this.x -= speed;
             }
+
+
         }
 
         if(isMovingUp) {
@@ -74,19 +88,56 @@ public class MainCharacter {
         }
 
         if(isMovingRight) {
-
             colMovingRight++;
 
             if(colMovingRight>=6) {
                 colMovingRight = 3;
-                }
             }
+
+            row = rowMovingRight;
+            col = colMovingRight;
         }
+
+        if(isMovingLeft) {
+
+            colMovingLeft++;
+
+            if(colMovingLeft>=6) {
+                colMovingLeft = 3;
+            }
+
+            row = rowMovingLeft;
+            col = colMovingLeft;
+        }
+
+        if(isMovingUp) {
+            colMovingUp++;
+
+            if(colMovingUp>=6) {
+                colMovingUp = 3;
+            }
+
+            row = rowMovingUp;
+            col = colMovingUp;
+        }
+
+
+        if(isMovingDown) {
+            colMovingDown++;
+
+            if(colMovingDown>=6) {
+                colMovingDown = 3;
+            }
+
+            row = rowMovingDown;
+            col = colMovingDown;
+        }
+    }
 
 
     public void render(Graphics g) {
 
-        g.drawImage(this.image.crop(colMovingRight, rowMovingRight), this.x, this.y, null);
+        g.drawImage(this.image.crop(col, row), this.x, this.y, null);
 
     }
 
