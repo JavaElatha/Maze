@@ -102,6 +102,22 @@ public class Game implements Runnable {
         for (int i = 460; i >= 0; i-=1) {
             this.g.drawImage(brick, 688, i, null);
         }
+        //среда
+        for (int i = 550; i >= 0; i-=1) {
+            this.g.drawImage(brick, i, 400, null);
+        }
+        for (int i = 200; i <= 690; i+=1) {
+            this.g.drawImage(brick, i, 300, null);
+        }
+        for (int i = 550; i >= 0; i-=1) {
+            this.g.drawImage(brick, i, 200, null);
+        }
+        for (int i = 200; i <= 690; i+=1) {
+            this.g.drawImage(brick, i, 140, null);
+        }
+        for (int i = 550; i >= 0; i-=1) {
+            this.g.drawImage(brick, i, 50, null);
+        }
     }
     @Override
     public void run() {
