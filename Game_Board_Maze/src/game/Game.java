@@ -73,8 +73,9 @@ public class Game implements Runnable {
         //начина,по които се рисува
         this.g = this.bs.getDrawGraphics();
 
-        BufferedImage img = ImageLoader.loadImage("/images/background.jpg");
-        this.g.drawImage(img, 0, 0, null);
+        BufferedImage img = ImageLoader.loadImage("/images/backgroundLast.jpg");
+        printMap(img);
+
         player.render(g);
         this.bs.show();
         this.g.dispose();//всичко в графиките ще визуализира
@@ -82,7 +83,26 @@ public class Game implements Runnable {
 
 
     }
-
+    private void printMap(BufferedImage img) {
+        BufferedImage brick = ImageLoader.loadImage("/images/bricks.jpg");
+        this.g.drawImage(img, 0, 0, null);
+        //ляво
+        for (int i = 0; i < 460; i+=1) {
+            this.g.drawImage(brick, 0, i, null);
+        }
+        // горе
+        for (int i = 0; i <= 680; i+=1) {
+            this.g.drawImage(brick, i, 0, null);
+        }
+        //долу
+        for (int i = 688; i >= 0; i-=1) {
+            this.g.drawImage(brick, i, 460, null);
+        }
+        //дясно
+        for (int i = 460; i >= 0; i-=1) {
+            this.g.drawImage(brick, 688, i, null);
+        }
+    }
     @Override
     public void run() {
         this.init();
