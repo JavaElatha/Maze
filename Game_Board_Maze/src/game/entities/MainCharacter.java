@@ -10,6 +10,7 @@ import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.awt.image.PackedColorModel;
+import java.util.ArrayList;
 
 /**
  * Created by ff on 3.11.2015 ã..
@@ -62,30 +63,30 @@ public class MainCharacter {
         this.contactBox.setBounds(this.x, this.y, this.width, this.height);
         if(this.isMovingRight) {
 
-            if(this.x+this.speed <= Launcher.game.getWidth() - this.width) {
+            if(this.x+this.speed <= Game.bricksCollection.get(3).x - this.width) {
                 this.x+=this.speed;
             }
         }
 
-        if(isMovingLeft) {
-            if(this.x-this.speed >= 0) {
+        if(this.isMovingLeft) {
+            if(this.x-this.speed >= Game.bricksCollection.get(0).x + Game.bricksCollection.get(0).width) {
                 this.x -= speed;
             }
         }
 
-        if(isMovingUp) {
-            if (this.y - this.speed >= 0) {
+        if(this.isMovingUp) {
+            if (this.y - this.speed >= Game.bricksCollection.get(1).y + 23) {
                 this.y -= speed;
             }
         }
 
-        if(isMovingDown){
-            if (this.y + this.speed <= Launcher.game.getHeight() - this.height) {
+        if(this.isMovingDown){
+            if (this.y + this.speed <= Game.bricksCollection.get(2).y - this.height) {
                 this.y += speed;
             }
         }
 
-        if(isMovingRight) {
+        if(this.isMovingRight) {
             colMovingRight++;
 
             if(colMovingRight>=6) {
@@ -96,7 +97,7 @@ public class MainCharacter {
             col = colMovingRight;
         }
 
-        if(isMovingLeft) {
+        if(this.isMovingLeft) {
 
             colMovingLeft++;
 
@@ -108,7 +109,7 @@ public class MainCharacter {
             col = colMovingLeft;
         }
 
-        if(isMovingUp) {
+        if(this.isMovingUp) {
             colMovingUp++;
 
             if(colMovingUp>=6) {
@@ -120,7 +121,7 @@ public class MainCharacter {
         }
 
 
-        if(isMovingDown) {
+        if(this.isMovingDown) {
             colMovingDown++;
 
             if(colMovingDown>=6) {
