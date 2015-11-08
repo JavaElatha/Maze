@@ -71,7 +71,7 @@ public class Game implements Runnable {
         //начина,по които се рисува
         this.g = this.bs.getDrawGraphics();
 
-        BufferedImage img = ImageLoader.loadImage("/images/backgroundLast.jpg");
+        BufferedImage img = ImageLoader.loadImage("/images/backgroundLast2.jpg");
         printMap(img);
 
         player.render(g);
