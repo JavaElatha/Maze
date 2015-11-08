@@ -1,16 +1,11 @@
 package game.entities;
 
-import display.Display;
 import game.Game;
 import game.InputHandler;
-import game.Launcher;
 import gfx.Assets;
 import gfx.SpriteSheet;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
-import java.awt.image.PackedColorModel;
-import java.util.ArrayList;
 
 /**
  * Created by ff on 3.11.2015 ã..
@@ -62,26 +57,65 @@ public class MainCharacter {
     public void tick() {
         this.contactBox.setBounds(this.x, this.y, this.width, this.height);
         if(this.isMovingRight) {
+            boolean crossesABorder = false;
 
-            if(this.x+this.speed <= Game.bricksCollection.get(3).x - this.width) {
+            for (int i = 0; i < Game.bricksCollection.size(); i++) {
+                crossesABorder = checkIfCrossesBorderToTheRight(i);
+                if(crossesABorder == true) {
+                    break;
+                }
+            }
+
+            if(!crossesABorder) {
                 this.x+=this.speed;
             }
         }
 
         if(this.isMovingLeft) {
-            if(this.x-this.speed >= Game.bricksCollection.get(0).x + Game.bricksCollection.get(0).width) {
+            boolean crossesABorder = false;
+
+            for (int i = 0; i < Game.bricksCollection.size(); i++) {
+                crossesABorder = checkIfCrossesABorderToTheLeft(i);
+
+                if(crossesABorder == true) {
+                    break;
+                }
+            }
+
+            if(!crossesABorder) {
                 this.x -= speed;
             }
         }
 
         if(this.isMovingUp) {
-            if (this.y - this.speed >= Game.bricksCollection.get(1).y + 23) {
+            boolean crossesABorder = false;
+
+            for (int i = 0; i < Game.bricksCollection.size(); i++) {
+                crossesABorder = checkIfCrossesABorderUp(i);
+
+                if(crossesABorder == true) {
+                    break;
+                }
+            }
+
+            if(!crossesABorder) {
                 this.y -= speed;
             }
+
         }
 
         if(this.isMovingDown){
-            if (this.y + this.speed <= Game.bricksCollection.get(2).y - this.height) {
+
+            boolean crossesABorder = false;
+
+            for (int i = 0; i < Game.bricksCollection.size(); i++) {
+                crossesABorder = checkIfCrossesBorderBellow(i);
+                if(crossesABorder == true) {
+                        break;
+                }
+            }
+
+            if(!crossesABorder) {
                 this.y += speed;
             }
         }
@@ -131,6 +165,50 @@ public class MainCharacter {
             row = rowMovingDown;
             col = colMovingDown;
         }
+    }
+
+    private boolean checkIfCrossesABorderUp(int i) {
+        boolean crossesABorder;
+        crossesABorder = this.y- this.speed > Game.bricksCollection.get(i).y
+                && this.y - this.speed < Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height
+                && this.x + this.width > Game.bricksCollection.get(i).x
+                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width;
+        return crossesABorder;
+    }
+
+    private boolean checkIfCrossesABorderToTheLeft(int i) {
+        boolean crossesABorder;
+        crossesABorder = ((this.y + this.height >= Game.bricksCollection.get(i).y
+                && this.y + this.height <= Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height)
+                ||
+                (this.y >= Game.bricksCollection.get(i).y && this.y <= Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height)
+                ||
+                (this.y < Game.bricksCollection.get(i).y && this.y+ this.height > Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height))
+                && this.x - this.speed  <= Game.bricksCollection.get(i).x + Game.bricksCollection.get(i).width
+                && this.x - this.speed >= Game.bricksCollection.get(i).x;
+        return crossesABorder;
+    }
+
+    private boolean checkIfCrossesBorderToTheRight(int i) {
+        boolean crossesABorder;
+        crossesABorder = ((this.y + this.height >= Game.bricksCollection.get(i).y
+                && this.y + this.height <= Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height)
+                ||
+                (this.y >= Game.bricksCollection.get(i).y && this.y <= Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height)
+                ||
+                (this.y < Game.bricksCollection.get(i).y && this.y+ this.height > Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height))
+                && this.x + this.speed + this.width >= Game.bricksCollection.get(i).x
+                && this.x + this.speed <= Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width;
+        return crossesABorder;
+    }
+
+    private boolean checkIfCrossesBorderBellow(int i) {
+        boolean crossesABorder;
+        crossesABorder = this.y+ this.speed + this.height > Game.bricksCollection.get(i).y
+                && this.y + this.speed + this.height < Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height
+                && this.x + this.width > Game.bricksCollection.get(i).x
+                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width;
+        return crossesABorder;
     }
 
 

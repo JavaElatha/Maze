@@ -58,7 +58,7 @@ public class Game implements Runnable {
         Assets.init();
         display = new Display(this.title, this.width, this.hight);
         //this.inputHandler = new InputHandler(this.display);
-        player = new MainCharacter("Pesho", cropWidth, cropHeight, 100, 200);
+        player = new MainCharacter("Pesho", cropWidth, cropHeight, 100, 100);
 
     }
 
@@ -76,7 +76,7 @@ public class Game implements Runnable {
         //начина,по които се рисува
         this.g = this.bs.getDrawGraphics();
 
-        BufferedImage img = ImageLoader.loadImage("/images/background.jpg");
+        BufferedImage img = ImageLoader.loadImage("/images/backgroundLast2.jpg");
         printMap(img);
 
         player.render(g);
@@ -93,46 +93,60 @@ public class Game implements Runnable {
         for (int i = 0; i < 460; i+=1) {
             this.g.drawImage(brick, 0, i, null);
         }
+        //brick 0
         bricksCollection.add(new Rectangle(0, 0, 12, 460));
 
         // up
         for (int i = 0; i <= 680; i+=1) {
             this.g.drawImage(brick, i, 0, null);
         }
+        //brick 1
         bricksCollection.add(new Rectangle(0, 0, 680, 23));
 
         //down
         for (int i = 688; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 460, null);
         }
-        bricksCollection.add(new Rectangle(0, 460, 12, 460));
+        //brick 2
+        bricksCollection.add(new Rectangle(0, 460, 688, 23 ));
 
         //right
         for (int i = 460; i >= 0; i-=1) {
             this.g.drawImage(brick, 688, i, null);
         }
-        bricksCollection.add(new Rectangle(688, 0, 680, 23));
+        //brick 3
+        bricksCollection.add(new Rectangle(688, 0, 23, 460));
 
         //middle
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 400, null);
         }
-        bricksCollection.add(new Rectangle(688, 0, 680, 23));
+        //brick 4
+        bricksCollection.add(new Rectangle(0, 400, 550, 23));
 
         for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 300, null);
         }
+        //brick 5
+        bricksCollection.add(new Rectangle(210, 300, 688, 23));
 
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 200, null);
         }
+        //brick 6
+        bricksCollection.add(new Rectangle(0, 200, 550, 23));
+
         for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 140, null);
         }
+        //brick 7
+        bricksCollection.add(new Rectangle(200, 140, 688, 23));
+
         for (int i = 550; i >= 0; i-=1) {
-            this.g.drawImage(brick, i, 50, null);
+            this.g.drawImage(brick, i, 60, null);
         }
-        bricksCollection.add(new Rectangle(0, 50, 550, 23));
+        //brick 8
+        bricksCollection.add(new Rectangle(0, 60, 550, 23));
 
     }
     @Override
