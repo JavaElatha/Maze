@@ -4,8 +4,6 @@ import display.Display;
 import game.entities.MainCharacter;
 import gfx.Assets;
 import gfx.ImageLoader;
-import gfx.SpriteSheet;
-import javafx.scene.input.KeyCode;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -22,7 +20,7 @@ public class Game implements Runnable {
     private Display display;
 
     private BufferStrategy bs;
-    private Graphics g; // позволява да рисуваме
+    private Graphics g; // allow us to draw
     public static MainCharacter player;
     private InputHandler inputHandler;
 
@@ -50,7 +48,7 @@ public class Game implements Runnable {
     }
 
 
-    //този метод се пишат всички  обекти,който ще работчт в играта
+    //all of the obejcts for the game will be in this method
     public void init() {
         Assets.init();
         display = new Display(this.title, this.width, this.hight);
@@ -86,33 +84,33 @@ public class Game implements Runnable {
     private void printMap(BufferedImage img) {
         BufferedImage brick = ImageLoader.loadImage("/images/bricks.jpg");
         this.g.drawImage(img, 0, 0, null);
-        //ляво
+        //left
         for (int i = 0; i < 460; i+=1) {
             this.g.drawImage(brick, 0, i, null);
         }
-        // горе
+        // up
         for (int i = 0; i <= 680; i+=1) {
             this.g.drawImage(brick, i, 0, null);
         }
-        //долу
+        //down
         for (int i = 688; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 460, null);
         }
-        //дясно
+        //right
         for (int i = 460; i >= 0; i-=1) {
             this.g.drawImage(brick, 688, i, null);
         }
-        //среда
+        //middle
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 400, null);
         }
-        for (int i = 200; i <= 690; i+=1) {
+        for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 300, null);
         }
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 200, null);
         }
-        for (int i = 200; i <= 690; i+=1) {
+        for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 140, null);
         }
         for (int i = 550; i >= 0; i-=1) {
