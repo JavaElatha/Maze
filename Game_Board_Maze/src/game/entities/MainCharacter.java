@@ -171,8 +171,9 @@ public class MainCharacter {
         boolean crossesABorder;
         crossesABorder = this.y- this.speed > Game.bricksCollection.get(i).y
                 && this.y - this.speed < Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height
-                && this.x + this.width > Game.bricksCollection.get(i).x
-                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width;
+                && ((this.x  > Game.bricksCollection.get(i).x
+                && this.x < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width) || (this.x + this.width > Game.bricksCollection.get(i).x
+                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width));
         return crossesABorder;
     }
 
@@ -206,8 +207,9 @@ public class MainCharacter {
         boolean crossesABorder;
         crossesABorder = this.y+ this.speed + this.height > Game.bricksCollection.get(i).y
                 && this.y + this.speed + this.height < Game.bricksCollection.get(i).y + Game.bricksCollection.get(i).height
-                && this.x + this.width > Game.bricksCollection.get(i).x
-                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width;
+                && ((this.x  >= Game.bricksCollection.get(i).x
+                && this.x <= Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width) || (this.x + this.width > Game.bricksCollection.get(i).x
+                && this.x + this.width < Game.bricksCollection.get(i).x+Game.bricksCollection.get(i).width));
         return crossesABorder;
     }
 

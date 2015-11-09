@@ -94,7 +94,7 @@ public class Game implements Runnable {
             this.g.drawImage(brick, 0, i, null);
         }
         //brick 0
-        bricksCollection.add(new Rectangle(0, 0, 12, 460));
+        bricksCollection.add(new Rectangle(0, 0, 5, 460));
 
         // up
         for (int i = 0; i <= 680; i+=1) {
@@ -115,38 +115,38 @@ public class Game implements Runnable {
             this.g.drawImage(brick, 688, i, null);
         }
         //brick 3
-        bricksCollection.add(new Rectangle(688, 0, 23, 460));
+        bricksCollection.add(new Rectangle(688, 0, 5, 460));
 
         //middle
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 400, null);
         }
         //brick 4
-        bricksCollection.add(new Rectangle(0, 400, 550, 23));
+        bricksCollection.add(new Rectangle(-1, 400, 560, 23));
 
         for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 300, null);
         }
         //brick 5
-        bricksCollection.add(new Rectangle(210, 300, 688, 23));
+        bricksCollection.add(new Rectangle(205, 300, 688, 23));
 
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 200, null);
         }
         //brick 6
-        bricksCollection.add(new Rectangle(0, 200, 550, 23));
+        bricksCollection.add(new Rectangle(-1, 200, 560, 23));
 
         for (int i = 200; i <= 688; i+=1) {
             this.g.drawImage(brick, i, 140, null);
         }
         //brick 7
-        bricksCollection.add(new Rectangle(200, 140, 688, 23));
+        bricksCollection.add(new Rectangle(205, 140, 688, 23));
 
         for (int i = 550; i >= 0; i-=1) {
             this.g.drawImage(brick, i, 60, null);
         }
         //brick 8
-        bricksCollection.add(new Rectangle(0, 60, 550, 23));
+        bricksCollection.add(new Rectangle(-1, 60, 560, 23));
 
     }
     @Override
