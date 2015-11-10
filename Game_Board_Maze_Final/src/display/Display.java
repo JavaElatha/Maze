@@ -1,6 +1,7 @@
 package display;
 
 import game.InputHandler;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
 import javax.swing.*;

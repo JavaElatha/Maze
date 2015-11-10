@@ -40,6 +40,18 @@ public class InputHandler implements KeyListener {
             if (keyCode == KeyEvent.VK_DOWN) {
                 MainCharacter.isMovingDown = true;
             }
+
+            if(keyCode == KeyEvent.VK_A) {
+                Game.pressedA = true;
+            }
+
+            if(keyCode == KeyEvent.VK_B) {
+                Game.pressedB = true;
+            }
+
+            if(keyCode == KeyEvent.VK_C) {
+                Game.pressedC = true;
+            }
         }
 
         @Override
@@ -60,6 +72,18 @@ public class InputHandler implements KeyListener {
 
             if (keyCode == KeyEvent.VK_DOWN) {
                 MainCharacter.isMovingDown = false;
+            }
+
+            if(keyCode == KeyEvent.VK_A) {
+                Game.pressedA = false;
+            }
+
+            if(keyCode == KeyEvent.VK_B) {
+                Game.pressedB = false;
+            }
+
+            if(keyCode == KeyEvent.VK_C) {
+                Game.pressedC = false;
             }
         }
     }

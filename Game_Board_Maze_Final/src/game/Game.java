@@ -4,6 +4,7 @@ import display.Display;
 import game.entities.MainCharacter;
 import gfx.Assets;
 import gfx.ImageLoader;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -24,17 +25,38 @@ public class Game implements Runnable {
     private Graphics g; // allow us to draw
     public static MainCharacter player;
     public static ArrayList<Rectangle> bricksCollection = new ArrayList<>();
+    public static ArrayList<Rectangle> questionsCollection = new ArrayList<>();
+
     private InputHandler inputHandler;
+
+    public static int levels = 1;
+    public static boolean tookAQuestionFirst;
+    public static boolean tookAQuestionSecond;
+    public static boolean tookAQuestionThird;
+    public static boolean tookAQuestionFourth;
+    public static boolean tookAQuestionFifth;
+    public static boolean tookAQuestionSixth;
+    public static boolean pressedA;
+    public static boolean pressedB;
+    public static boolean pressedC;
+    public static boolean firstQuestionIsAnswered;
+    public static boolean secondQuestionIsAnswered;
+    public static boolean thirdQuestionIsAnswered;
+    public static boolean fourthQuestionIsAnswered;
+    public static boolean fifthQuestionIsAnswered;
+    public static boolean sixthQuestionIsAnswered;
 
     private int cropWidth = 32;
     private int cropHeight = 32;
 
     private Rectangle b = new Rectangle(0, 200, 550, 23);
-    BufferedImage firstImage;
-    BufferedImage secImage;
-    BufferedImage thirdImage;
-    BufferedImage fourImage;
-    BufferedImage fiveImage;
+
+    BufferedImage firstImage = ImageLoader.loadImage("/images/first_question.png");
+    BufferedImage secImage = ImageLoader.loadImage("/images/question_One_Answer.png");
+    BufferedImage thirdImage = ImageLoader.loadImage("/images/rock_cotton.png");
+    BufferedImage fourImage = ImageLoader.loadImage("/images/Second_Question.png");
+    BufferedImage fiveImage = ImageLoader.loadImage("/images/months.jpg");
+    BufferedImage sixImage = ImageLoader.loadImage("/images/months.jpg");
 
 
     public Game(String title, int width, int hight) {
@@ -65,10 +87,14 @@ public class Game implements Runnable {
         //this.inputHandler = new InputHandler(this.display);
         player = new MainCharacter("Pesho", cropWidth, cropHeight, 100, 100);
 
+
     }
 
     private void tick() {
+
         player.tick();
+
+
     }
 
     private void render() {
@@ -82,54 +108,175 @@ public class Game implements Runnable {
         this.g = this.bs.getDrawGraphics();
 
         BufferedImage img = ImageLoader.loadImage("/images/backgroundLast2.jpg");
+
+
         printMap(img);
         BufferedImage coin = ImageLoader.loadImage("/images/coin2.jpg");
         Questions(coin);
-        firstImage = ImageLoader.loadImage("/images/first_question.png");
-        secImage = ImageLoader.loadImage("/images/question_One_Answer.png");
-        thirdImage = ImageLoader.loadImage("/images/rock_cotton.png");
-        fourImage = ImageLoader.loadImage("/images/Second_Question.png");
-        fiveImage = ImageLoader.loadImage("/images/months.jpg");
 
-        Image(firstImage);
-        Image(secImage);
-        Image(thirdImage);
-        Image(fourImage);
-        Image(fiveImage);
 
+        Image();
         player.render(g);
         this.bs.show();
         this.g.dispose();//������ � ��������� �� �����������
 
     }
 
-    private void Image(BufferedImage imageQ) {
-        this.g.drawImage(firstImage, 100, 24, null);
-        this.g.drawImage(secImage, 100, 24, null);
-        this.g.drawImage(thirdImage, 100, 24, null);
-        this.g.drawImage(fourImage, 100, 24, null);
-        this.g.drawImage(fiveImage, 100, 24, null);
+    private void Image() {
+
+        if(tookAQuestionFirst) {
+            this.g.drawImage(firstImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.lives--;
+                tookAQuestionFirst = false;
+                levels++;
+            } else if(pressedB) {
+                MainCharacter.score++;
+                tookAQuestionFirst = false;
+                levels++;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionFirst = false;
+                levels++;
+            }
+
+            firstQuestionIsAnswered = true;
+
+        } else if(tookAQuestionSecond) {
+
+            this.g.drawImage(secImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.score++;
+                tookAQuestionSecond = false;
+            } else if(pressedB) {
+                MainCharacter.lives--;
+                tookAQuestionSecond = false;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionSecond = false;
+            }
+
+            secondQuestionIsAnswered = true;
+
+        } else if (tookAQuestionThird) {
+            this.g.drawImage(thirdImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.score++;
+                tookAQuestionThird = false;
+                levels++;
+            } else if(pressedB) {
+                MainCharacter.lives--;
+                tookAQuestionThird = false;
+                levels++;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionThird = false;
+                levels++;
+            }
+
+            thirdQuestionIsAnswered = true;
+
+        } else if (tookAQuestionFourth) {
+            this.g.drawImage(fourImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.score++;
+                tookAQuestionFourth = false;
+            } else if(pressedB) {
+                MainCharacter.lives--;
+                tookAQuestionFourth = false;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionFourth = false;
+            }
+
+            fourthQuestionIsAnswered = true;
+
+        } else if(tookAQuestionFifth) {
+            this.g.drawImage(fiveImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.score++;
+                tookAQuestionFifth = false;
+            } else if(pressedB) {
+                MainCharacter.lives--;
+                tookAQuestionFifth = false;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionFifth = false;
+            }
+
+            fifthQuestionIsAnswered = true;
+
+        } else if (tookAQuestionSixth) {
+            this.g.drawImage(sixImage, 100, 24, null);
+            if(pressedA) {
+                MainCharacter.score++;
+                tookAQuestionSixth = false;
+                levels++;
+            } else if(pressedB) {
+                MainCharacter.lives--;
+                tookAQuestionSixth = false;
+                levels++;
+            } else if(pressedC) {
+                MainCharacter.lives--;
+                tookAQuestionSixth = false;
+                levels++;
+            }
+
+            sixthQuestionIsAnswered = true;
+        }
     }
 
+
+
+
     private void Questions(BufferedImage coin) {
-        //1 question
-        this.g.drawImage(coin, 100, 25, null);
-        // this.g.drawImage(fImage, 100, 25, null);
-//2 questions
-        this.g.drawImage(coin, 600, 370, null);
-        this.g.drawImage(coin, 400, 250, null);
-//3 questions
-        this.g.drawImage(coin, 200, 350, null);
-        this.g.drawImage(coin, 370, 430, null);
-        this.g.drawImage(coin, 50, 120, null);
+        if(levels == 1 && !firstQuestionIsAnswered) {
+            //1 question
+            this.g.drawImage(coin, 100, 25, null);
+        } else if(levels == 2) {
+            //2 questions
+            if(!secondQuestionIsAnswered) {
+                this.g.drawImage(coin, 400, 250, null);
+            }
+
+            if(!thirdQuestionIsAnswered) {
+                this.g.drawImage(coin, 600, 370, null);
+            }
+        } else if(levels == 3) {
+            //3 questions
+
+            if(!fourthQuestionIsAnswered) {
+                this.g.drawImage(coin, 200,350, null);
+            }
+
+            if(!fifthQuestionIsAnswered) {
+                this.g.drawImage(coin, 370, 430, null);
+            }
+
+            if(!sixthQuestionIsAnswered) {
+                this.g.drawImage(coin, 50,120, null);
+            }
+        } else {
+
+        }
     }
 
     private void printMap(BufferedImage img) {
         BufferedImage brick = ImageLoader.loadImage("/images/bricks.jpg");
+        BufferedImage scoreBackground = ImageLoader.loadImage("/images/ScoreBackground.png");
+        this.g.drawImage(scoreBackground, 700, 0, null);
+
+        String a = "Score: " + MainCharacter.score;
+        this.g.drawString(a, 720, 50);
+
+        String b = "Lives: " + MainCharacter.lives;
+        this.g.drawString(b, 720, 100);
+
         this.g.drawImage(img, 0, 0, null);
         //left
         for (int i = 0; i < 460; i += 1) {
             this.g.drawImage(brick, 0, i, null);
+
         }
         //brick 0
         bricksCollection.add(new Rectangle(0, 0, 5, 460));
@@ -191,7 +338,12 @@ public class Game implements Runnable {
     @Override
     public void run() {
         this.init();
-
+        questionsCollection.add(new Rectangle(100, 25, 48, 28));
+        questionsCollection.add(new Rectangle(400, 250, 48, 28));
+        questionsCollection.add(new Rectangle(600, 370, 48, 28));
+        questionsCollection.add(new Rectangle(200, 350, 48, 28));
+        questionsCollection.add(new Rectangle(370, 430, 48, 28));
+        questionsCollection.add(new Rectangle(50, 120, 48, 28));
 
         int fps = 15;
         double timePerTick = 1_000_000_000.0 / fps;
