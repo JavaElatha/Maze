@@ -9,7 +9,7 @@ import java.io.IOException;
  * зарежда картинки
  */
 public class ImageLoader {
-    //връща картинката
+    //return pictures
     public  static BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(ImageLoader.class.getResource(path));
