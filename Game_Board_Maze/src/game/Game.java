@@ -86,8 +86,8 @@ public class Game implements Runnable {
         BufferedImage img = ImageLoader.loadImage("/images/backgroundLast2.jpg");
         printMap(img);
         //coins
-        BufferedImage coin = ImageLoader.loadImage("/images/coin1.jpg");
-        this.g.drawImage(coin, 100, 100, null);
+        BufferedImage coin = ImageLoader.loadImage("/images/FINASL.png");
+        this.g.drawImage(coin, 10, 10, null);
 
         player.render(g);
         this.bs.show();
