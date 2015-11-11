@@ -46,6 +46,13 @@ public class Game implements Runnable {
     public static boolean fifthQuestionIsAnswered;
     public static boolean sixthQuestionIsAnswered;
 
+    public static boolean firstQuestionIsVisible;
+    public static boolean secondQuestionIsVisible;
+    public static boolean thirdQuestionIsVisible;
+    public static boolean fourthQuestionIsVisible;
+    public static boolean fifthQuestionIsVisible;
+    public static boolean sixthQuestionIsVisible;
+
     private int cropWidth = 32;
     private int cropHeight = 32;
 
@@ -56,7 +63,7 @@ public class Game implements Runnable {
     BufferedImage thirdImage = ImageLoader.loadImage("/images/rock_cotton.png");
     BufferedImage fourImage = ImageLoader.loadImage("/images/Second_Question.png");
     BufferedImage fiveImage = ImageLoader.loadImage("/images/months.jpg");
-    BufferedImage sixImage = ImageLoader.loadImage("/images/months.jpg");
+    BufferedImage sixImage = ImageLoader.loadImage("/images/rumerAndVal.png");
 
 
     public Game(String title, int width, int hight) {
@@ -146,13 +153,13 @@ public class Game implements Runnable {
 
             this.g.drawImage(secImage, 100, 24, null);
             if(pressedA) {
-                MainCharacter.score++;
+                MainCharacter.lives--;
                 tookAQuestionSecond = false;
             } else if(pressedB) {
                 MainCharacter.lives--;
                 tookAQuestionSecond = false;
             } else if(pressedC) {
-                MainCharacter.lives--;
+                MainCharacter.score++;
                 tookAQuestionSecond = false;
             }
 
@@ -179,50 +186,54 @@ public class Game implements Runnable {
         } else if (tookAQuestionFourth) {
             this.g.drawImage(fourImage, 100, 24, null);
             if(pressedA) {
-                MainCharacter.score++;
-                tookAQuestionFourth = false;
-            } else if(pressedB) {
                 MainCharacter.lives--;
                 tookAQuestionFourth = false;
+                fourthQuestionIsAnswered = true;
+            } else if(pressedB) {
+                MainCharacter.score++;
+                tookAQuestionFourth = false;
+                fourthQuestionIsAnswered = true;
             } else if(pressedC) {
                 MainCharacter.lives--;
                 tookAQuestionFourth = false;
+                fourthQuestionIsAnswered = true;
             }
-
-            fourthQuestionIsAnswered = true;
 
         } else if(tookAQuestionFifth) {
             this.g.drawImage(fiveImage, 100, 24, null);
             if(pressedA) {
                 MainCharacter.score++;
                 tookAQuestionFifth = false;
+                fifthQuestionIsAnswered = true;
             } else if(pressedB) {
                 MainCharacter.lives--;
                 tookAQuestionFifth = false;
+                fifthQuestionIsAnswered = true;
             } else if(pressedC) {
                 MainCharacter.lives--;
                 tookAQuestionFifth = false;
+                fifthQuestionIsAnswered = true;
             }
-
-            fifthQuestionIsAnswered = true;
 
         } else if (tookAQuestionSixth) {
             this.g.drawImage(sixImage, 100, 24, null);
             if(pressedA) {
-                MainCharacter.score++;
-                tookAQuestionSixth = false;
-                levels++;
-            } else if(pressedB) {
                 MainCharacter.lives--;
                 tookAQuestionSixth = false;
-                levels++;
+                sixthQuestionIsAnswered = true;
+            } else if(pressedB) {
+                MainCharacter.score++;
+                tookAQuestionSixth = false;
+                sixthQuestionIsAnswered = true;
             } else if(pressedC) {
                 MainCharacter.lives--;
                 tookAQuestionSixth = false;
-                levels++;
+                sixthQuestionIsAnswered = true;
             }
+        }
 
-            sixthQuestionIsAnswered = true;
+        if(fourthQuestionIsAnswered && fifthQuestionIsAnswered && sixthQuestionIsAnswered) {
+            levels++;
         }
     }
 
@@ -230,34 +241,45 @@ public class Game implements Runnable {
 
 
     private void Questions(BufferedImage coin) {
-        if(levels == 1 && !firstQuestionIsAnswered) {
+        if(levels == 1) {
             //1 question
             this.g.drawImage(coin, 100, 25, null);
+            firstQuestionIsVisible = true;
+
         } else if(levels == 2) {
             //2 questions
             if(!secondQuestionIsAnswered) {
                 this.g.drawImage(coin, 400, 250, null);
+                secondQuestionIsVisible = true;
             }
 
             if(!thirdQuestionIsAnswered) {
                 this.g.drawImage(coin, 600, 370, null);
+                thirdQuestionIsVisible = true;
             }
-        } else if(levels == 3) {
+        } else if (levels == 3){
             //3 questions
-
             if(!fourthQuestionIsAnswered) {
                 this.g.drawImage(coin, 200,350, null);
+                fourthQuestionIsVisible = true;
             }
 
             if(!fifthQuestionIsAnswered) {
                 this.g.drawImage(coin, 370, 430, null);
+                fifthQuestionIsVisible = true;
             }
 
             if(!sixthQuestionIsAnswered) {
                 this.g.drawImage(coin, 50,120, null);
+                sixthQuestionIsVisible = true;
             }
         } else {
-
+            BufferedImage winPicture = ImageLoader.loadImage("/images/winPicture.png");
+            this.g.drawImage(winPicture, 150, 150, null);
+            String a = "Bravo! You passed all levels!";
+            this.g.drawString(a, 210, 170);
+            String b = "Score: " + MainCharacter.score;
+            this.g.drawString(b, 210, 180);
         }
     }
 
@@ -333,6 +355,7 @@ public class Game implements Runnable {
         //brick 8
         bricksCollection.add(new Rectangle(-1, 60, 560, 23));
 
+
     }
 
     @Override
@@ -344,6 +367,7 @@ public class Game implements Runnable {
         questionsCollection.add(new Rectangle(200, 350, 48, 28));
         questionsCollection.add(new Rectangle(370, 430, 48, 28));
         questionsCollection.add(new Rectangle(50, 120, 48, 28));
+
 
         int fps = 15;
         double timePerTick = 1_000_000_000.0 / fps;
