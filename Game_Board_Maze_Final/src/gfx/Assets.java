@@ -14,6 +14,5 @@ public class Assets {
     public static void init() {
 
         player = ImageLoader.loadImage("/images/bbs_spritesheet.png");
-        background = ImageLoader.loadImage("/images/boywalk2.png");
     }
 }

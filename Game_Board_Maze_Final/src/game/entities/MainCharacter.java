@@ -36,7 +36,6 @@ public class MainCharacter {
     public static boolean isMovingUp;
     public static boolean isMovingDown;
 
-    private Graphics g;
     private SpriteSheet image;
     private Rectangle contactBox;
     private boolean isInQuestions;
@@ -218,28 +217,28 @@ public class MainCharacter {
 
     private void launchAQuestion(int i) {
         if(i==0) {
-            if (!Game.firstQuestionIsAnswered) {
-                Game.tookAQuestionFirst = true;
+            if (!Quiz.firstQuestionIsAnswered) {
+                Quiz.tookAQuestionFirst = true;
             }
         } else if(i==1) {
-            if(!Game.secondQuestionIsAnswered && Game.secondQuestionIsVisible) {
-                Game.tookAQuestionSecond = true;
+            if(!Quiz.secondQuestionIsAnswered && Quiz.secondQuestionIsVisible) {
+                Quiz.tookAQuestionSecond = true;
             }
         } else if(i==2) {
-            if(!Game.thirdQuestionIsAnswered && Game.thirdQuestionIsVisible) {
-                Game.tookAQuestionThird = true;
+            if(!Quiz.thirdQuestionIsAnswered && Quiz.thirdQuestionIsVisible) {
+                Quiz.tookAQuestionThird = true;
             }
         } else if(i==3) {
-            if(!Game.fourthQuestionIsAnswered && Game.fourthQuestionIsVisible) {
-                Game.tookAQuestionFourth = true;
+            if(!Quiz.fourthQuestionIsAnswered && Quiz.fourthQuestionIsVisible) {
+                Quiz.tookAQuestionFourth = true;
             }
         } else if (i==4) {
-            if(!Game.fifthQuestionIsAnswered && Game.fifthQuestionIsVisible) {
-                Game.tookAQuestionFifth = true;
+            if(!Quiz.fifthQuestionIsAnswered && Quiz.fifthQuestionIsVisible) {
+                Quiz.tookAQuestionFifth = true;
             }
         } else if (i==5) {
-            if(!Game.sixthQuestionIsAnswered && Game.sixthQuestionIsVisible) {
-                Game.tookAQuestionSixth = true;
+            if(!Quiz.sixthQuestionIsAnswered && Quiz.sixthQuestionIsVisible) {
+                Quiz.tookAQuestionSixth = true;
             }
         }
     }

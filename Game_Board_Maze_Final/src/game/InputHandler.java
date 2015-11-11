@@ -2,7 +2,7 @@ package game;
 
 import display.Display;
 import game.entities.MainCharacter;
-import javafx.scene.input.KeyCode;
+import game.entities.Quiz;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -42,15 +42,15 @@ public class InputHandler implements KeyListener {
             }
 
             if(keyCode == KeyEvent.VK_A) {
-                Game.pressedA = true;
+                Quiz.pressedA = true;
             }
 
             if(keyCode == KeyEvent.VK_B) {
-                Game.pressedB = true;
+                Quiz.pressedB = true;
             }
 
             if(keyCode == KeyEvent.VK_C) {
-                Game.pressedC = true;
+                Quiz.pressedC = true;
             }
         }
 
@@ -75,15 +75,15 @@ public class InputHandler implements KeyListener {
             }
 
             if(keyCode == KeyEvent.VK_A) {
-                Game.pressedA = false;
+                Quiz.pressedA = false;
             }
 
             if(keyCode == KeyEvent.VK_B) {
-                Game.pressedB = false;
+                Quiz.pressedB = false;
             }
 
             if(keyCode == KeyEvent.VK_C) {
-                Game.pressedC = false;
+                Quiz.pressedC = false;
             }
         }
     }
