@@ -288,5 +288,4 @@ public class MainCharacter {
         g.drawImage(this.image.crop(col, row), this.x, this.y, null);
 
     }
-
 }

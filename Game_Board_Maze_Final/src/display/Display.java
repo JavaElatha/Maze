@@ -31,7 +31,7 @@ public class Display extends Canvas {
         createFrame();
     }
 
-    //за да може и други класове да използват Canvas,тъй като е private
+    // class Canvas is public because we need to yoy from other classes
     public Canvas getCanvas() {
         return this.canvas;
     }
@@ -52,6 +52,6 @@ public class Display extends Canvas {
         this.inputHandler = new InputHandler(this);
         frame.addKeyListener(inputHandler);
         frame.add(canvas);
-        frame.pack(); //опакова всиюко написано до тук
+        frame.pack(); //packet all
     }
 }
