@@ -1,5 +1,7 @@
 Project name: "Maze Runner"
 
+GitHub repository: https://github.com/JavaElatha/Maze
+
 Description: Our game has a maze and several questions in it. The main character has to collect all the questions and answer them. Answers should be with a, b, c from the keyboard.
 
 Team name: Team "Elatha"
