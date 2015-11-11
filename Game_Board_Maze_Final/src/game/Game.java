@@ -235,6 +235,15 @@ public class Game implements Runnable {
         if(fourthQuestionIsAnswered && fifthQuestionIsAnswered && sixthQuestionIsAnswered) {
             levels++;
         }
+
+        if(MainCharacter.lives == 0) {
+            BufferedImage winPicture = ImageLoader.loadImage("/images/winGameOverPicture.png");
+            this.g.drawImage(winPicture, 150, 150, null);
+            String a = "Come again!";
+            this.g.drawString(a, 210, 170);
+            String b = "Score: " + MainCharacter.score;
+            this.g.drawString(b, 210, 180);
+        }
     }
 
 
@@ -274,7 +283,7 @@ public class Game implements Runnable {
                 sixthQuestionIsVisible = true;
             }
         } else {
-            BufferedImage winPicture = ImageLoader.loadImage("/images/winPicture.png");
+            BufferedImage winPicture = ImageLoader.loadImage("/images/winGameOverPicture.png");
             this.g.drawImage(winPicture, 150, 150, null);
             String a = "Bravo! You passed all levels!";
             this.g.drawString(a, 210, 170);
