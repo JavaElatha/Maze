@@ -10,6 +10,6 @@ Team members and contributions:
 
 Daniela Valcheva - the main character, part of the logic for the questions, the logic for the different levels;
 
-Zahariya Pehlivanova - 
+Zahariya Pehlivanova - the maze, part of the logic for the questions
 
 Margarita Ivanova - 

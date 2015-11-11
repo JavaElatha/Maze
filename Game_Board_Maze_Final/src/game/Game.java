@@ -94,6 +94,8 @@ public class Game implements Runnable {
         BufferedImage scoreBackground = ImageLoader.loadImage("/images/ScoreBackground.png");
         BufferedImage scoreBackgroundDown = ImageLoader.loadImage("/images/BackgroundDown.png");
 
+
+
         this.g.drawImage(scoreBackground, 700, 0, null);
         this.g.drawImage(scoreBackgroundDown, 0, 460, null);
 
