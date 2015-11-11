@@ -12,4 +12,4 @@ Daniela Valcheva - the main character, part of the logic for the questions, the 
 
 Zahariya Pehlivanova - the maze, part of the logic for the questions
 
-Margarita Ivanova - 
+Margarita Ivanova - the basic logic of the game,part of the logic for the questions.
