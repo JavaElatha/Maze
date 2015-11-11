@@ -1,6 +1,5 @@
 package game.entities;
 
-import game.Game;
 import gfx.ImageLoader;
 
 import java.awt.*;
@@ -10,8 +9,6 @@ import java.awt.image.BufferedImage;
  * Created by ff on 11.11.2015 ã..
  */
  public class Quiz {
-
-    private Graphics g;
 
     public static int levels = 1;
 
@@ -40,21 +37,19 @@ import java.awt.image.BufferedImage;
     public static boolean fifthQuestionIsAnswered;
     public static boolean sixthQuestionIsAnswered;
 
-    BufferedImage firstImage = ImageLoader.loadImage("/images/first_question.png");
-    BufferedImage secImage = ImageLoader.loadImage("/images/question_One_Answer.png");
-    BufferedImage thirdImage = ImageLoader.loadImage("/images/rock_cotton.png");
-    BufferedImage fourImage = ImageLoader.loadImage("/images/Second_Question.png");
-    BufferedImage fiveImage = ImageLoader.loadImage("/images/months.jpg");
-    BufferedImage sixImage = ImageLoader.loadImage("/images/rumerAndVal.png");
-
     public static BufferedImage coin = ImageLoader.loadImage("/images/coin2.jpg");
+
+    private BufferedImage firstImage = ImageLoader.loadImage("/images/first_question.png");
+    private BufferedImage secImage = ImageLoader.loadImage("/images/question_One_Answer.png");
+    private BufferedImage thirdImage = ImageLoader.loadImage("/images/rock_cotton.png");
+    private BufferedImage fourImage = ImageLoader.loadImage("/images/Second_Question.png");
+    private BufferedImage fiveImage = ImageLoader.loadImage("/images/months.jpg");
+    private BufferedImage sixImage = ImageLoader.loadImage("/images/rumerAndVal.png");
 
     public Quiz() {
     }
 
-    public void tick() {
-    }
-
+    //drawing the question marks around the field depending on the level
     public void Questions(BufferedImage coin, Graphics g) {
         if(levels == 1) {
             //1 question
@@ -89,6 +84,7 @@ import java.awt.image.BufferedImage;
                 sixthQuestionIsVisible = true;
             }
         } else {
+            //if all the levels are passed successfully
             BufferedImage winPicture = ImageLoader.loadImage("/images/winGameOverPicture.png");
             g.drawImage(winPicture, 150, 150, null);
             String a = "Bravo! You passed all levels!";
@@ -97,9 +93,9 @@ import java.awt.image.BufferedImage;
             g.drawString(b, 210, 180);
         }
     }
-
+    //Determining whether the given answer is right or wrong. If the answer is correct, the player gets a point.
+    // If it is wrong, he loses a life.
     public void Image(Graphics g) {
-
         if(tookAQuestionFirst) {
             g.drawImage(firstImage, 100, 24, null);
             if(pressedA) {
@@ -205,10 +201,11 @@ import java.awt.image.BufferedImage;
             levels++;
         }
 
+        //if the player makes more than 3 mistakes, the game is over.
         if(MainCharacter.lives == 0) {
             BufferedImage winPicture = ImageLoader.loadImage("/images/winGameOverPicture.png");
             g.drawImage(winPicture, 150, 150, null);
-            String a = "Come again!";
+            String a = "Game over!";
             g.drawString(a, 210, 170);
             String b = "Score: " + MainCharacter.score;
             g.drawString(b, 210, 180);

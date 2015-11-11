@@ -1,7 +1,6 @@
 package game.entities;
 
 import game.Game;
-import game.InputHandler;
 import gfx.Assets;
 import gfx.SpriteSheet;
 
@@ -38,10 +37,6 @@ public class MainCharacter {
 
     private SpriteSheet image;
     private Rectangle contactBox;
-    private boolean isInQuestions;
-
-    private InputHandler inputHandler;
-
 
     public MainCharacter (String name, int width, int height, int x, int y) {
         this.name = name;
@@ -58,7 +53,7 @@ public class MainCharacter {
         this.contactBox.setBounds(this.x, this.y, this.width, this.height);
         if(this.isMovingRight) {
             boolean crossesABorder = false;
-
+            //check if there is a brick border to the right
             for (int i = 0; i < Game.bricksCollection.size(); i++) {
                 crossesABorder = checkIfCrossesBorderToTheRight(i, Game.bricksCollection);
                 if(crossesABorder == true) {
@@ -71,7 +66,7 @@ public class MainCharacter {
             }
 
             boolean crossesAQuestion = false;
-
+            //check if there is a question mark to the right
             for (int i = 0; i < Game.questionsCollection.size(); i++) {
 
                 crossesAQuestion = checkIfCrossesBorderToTheRight(i, Game.questionsCollection);
@@ -85,7 +80,7 @@ public class MainCharacter {
 
         if(this.isMovingLeft) {
             boolean crossesABorder = false;
-
+            //check if there is a brick border to the left
             for (int i = 0; i < Game.bricksCollection.size(); i++) {
                 crossesABorder = checkIfCrossesABorderToTheLeft(i, Game.bricksCollection);
 
@@ -99,7 +94,7 @@ public class MainCharacter {
             }
 
             boolean crossesAQuestion = false;
-
+            //check if there is a question mark to the left
             for (int i = 0; i < Game.questionsCollection.size(); i++) {
 
                 crossesAQuestion = checkIfCrossesABorderToTheLeft(i, Game.questionsCollection);
@@ -113,7 +108,7 @@ public class MainCharacter {
 
         if(this.isMovingUp) {
             boolean crossesABorder = false;
-
+            //check if there is a brick border above
             for (int i = 0; i < Game.bricksCollection.size(); i++) {
                 crossesABorder = checkIfCrossesABorderUp(i, Game.bricksCollection);
 
@@ -127,7 +122,7 @@ public class MainCharacter {
             }
 
             boolean crossesAQuestion = false;
-
+            //check if there is a question mark above
             for (int i = 0; i < Game.questionsCollection.size(); i++) {
 
                 crossesAQuestion = checkIfCrossesABorderUp(i, Game.questionsCollection);
@@ -143,7 +138,7 @@ public class MainCharacter {
         if(this.isMovingDown){
 
             boolean crossesABorder = false;
-
+            //check if there is a brick border bellow
             for (int i = 0; i < Game.bricksCollection.size(); i++) {
                 crossesABorder = checkIfCrossesBorderBellow(i, Game.bricksCollection);
                 if(crossesABorder == true) {
@@ -156,7 +151,7 @@ public class MainCharacter {
             }
 
             boolean crossesAQuestion = false;
-
+            //check if there is a question mark bellow
             for (int i = 0; i < Game.questionsCollection.size(); i++) {
 
                 crossesAQuestion = checkIfCrossesBorderBellow(i, Game.questionsCollection);
@@ -168,6 +163,7 @@ public class MainCharacter {
             }
         }
 
+        //checking the direction of movement and choosing the crop positions of the sprite sheet.
         if(this.isMovingRight) {
             colMovingRight++;
 
@@ -247,38 +243,20 @@ public class MainCharacter {
         boolean crossesABorder;
         crossesABorder = this.y- this.speed > rectangles.get(i).y
                 && this.y - this.speed < rectangles.get(i).y + rectangles.get(i).height
-                && ((this.x  > rectangles.get(i).x
-                && this.x < rectangles.get(i).x + rectangles.get(i).width) || (this.x + this.width > rectangles.get(i).x
-                && this.x + this.width < rectangles.get(i).x+rectangles.get(i).width));
+                && ((this.x  > rectangles.get(i).x && this.x < rectangles.get(i).x + rectangles.get(i).width)
+                || (this.x + this.width > rectangles.get(i).x && this.x + this.width < rectangles.get(i).x+rectangles.get(i).width));
         return crossesABorder;
     }
 
     private boolean checkIfCrossesABorderToTheLeft(int i, ArrayList<Rectangle> rectangles) {
         boolean crossesABorder;
 
-        boolean a = this.y + this.height >= rectangles.get(i).y
-                && this.y + this.height <= rectangles.get(i).y + rectangles.get(i).height;
-
-        boolean b = this.y >= rectangles.get(i).y && this.y <= rectangles.get(i).y + rectangles.get(i).height;
-
-        boolean c = this.y < rectangles.get(i).y && this.y+ this.height > rectangles.get(i).y + rectangles.get(i).height;
-
-        boolean d = this.x - this.speed  <= rectangles.get(i).x + rectangles.get(i).width;
-
-        boolean e = this.x - this.speed >= rectangles.get(i).x;
-
-        if(a && isInQuestions) {
-
-        }
-
-        if(b && isInQuestions) {
-        }
-
-        if(c && isInQuestions) {
-            System.out.println("c");
-        }
-
-        crossesABorder = ((a) || (b) || (c)) && d && e;
+        crossesABorder = ((this.y + this.height >= rectangles.get(i).y
+                && this.y + this.height <= rectangles.get(i).y + rectangles.get(i).height)
+                || (this.y >= rectangles.get(i).y && this.y <= rectangles.get(i).y + rectangles.get(i).height)
+                || ( this.y < rectangles.get(i).y && this.y+ this.height > rectangles.get(i).y + rectangles.get(i).height))
+                && this.x - this.speed  <= rectangles.get(i).x + rectangles.get(i).width
+                && this.x - this.speed >= rectangles.get(i).x;
 
         return crossesABorder;
     }
@@ -287,10 +265,8 @@ public class MainCharacter {
         boolean crossesABorder;
         crossesABorder = ((this.y + this.height >= rectangles.get(i).y
                 && this.y + this.height <= rectangles.get(i).y + rectangles.get(i).height)
-                ||
-                (this.y >= rectangles.get(i).y && this.y <= rectangles.get(i).y + rectangles.get(i).height)
-                ||
-                (this.y < rectangles.get(i).y && this.y+ this.height > rectangles.get(i).y + rectangles.get(i).height))
+                || (this.y >= rectangles.get(i).y && this.y <= rectangles.get(i).y + rectangles.get(i).height)
+                || (this.y < rectangles.get(i).y && this.y+ this.height > rectangles.get(i).y + rectangles.get(i).height))
                 && this.x + this.speed + this.width >= rectangles.get(i).x
                 && this.x + this.speed <= rectangles.get(i).x+rectangles.get(i).width;
         return crossesABorder;
@@ -306,6 +282,7 @@ public class MainCharacter {
         return crossesABorder;
     }
 
+    //draw the main character.
     public void render(Graphics g) {
 
         g.drawImage(this.image.crop(col, row), this.x, this.y, null);

@@ -17,6 +17,7 @@ public class SpriteSheet {
         this.cropHeight = cropHeight;
     }
 
+    //determining what part of the picture should be cropped
     public BufferedImage crop (int col, int row) {
         return this.image.getSubimage(col*cropWidth, row*cropHeight, cropWidth, cropHeight);
     }

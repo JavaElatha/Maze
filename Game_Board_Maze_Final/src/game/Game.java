@@ -26,14 +26,11 @@ public class Game implements Runnable {
     public static MainCharacter player;
     public static Quiz questions;
 
-    public static ArrayList<Rectangle> bricksCollection = new ArrayList<>();
-    public static ArrayList<Rectangle> questionsCollection = new ArrayList<>();
-
-
     private int cropWidth = 32;
     private int cropHeight = 32;
 
-    private Rectangle b = new Rectangle(0, 200, 550, 23);
+    public static ArrayList<Rectangle> bricksCollection = new ArrayList<>();
+    public static ArrayList<Rectangle> questionsCollection = new ArrayList<>();
 
 
     public Game(String title, int width, int hight) {
@@ -57,19 +54,16 @@ public class Game implements Runnable {
     }
 
 
-    //all of the obejcts for the game will be in this method
+    //all of the objects for the game will be in this method
     public void init() {
         Assets.init();
         display = new Display(this.title, this.width, this.hight);
-        //this.inputHandler = new InputHandler(this.display);
         player = new MainCharacter("Pesho", cropWidth, cropHeight, 100, 100);
         questions = new Quiz();
     }
 
     private void tick() {
-
         player.tick();
-        questions.tick();
 
     }
 
@@ -98,7 +92,10 @@ public class Game implements Runnable {
     private void printMap(BufferedImage img) {
         BufferedImage brick = ImageLoader.loadImage("/images/bricks.jpg");
         BufferedImage scoreBackground = ImageLoader.loadImage("/images/ScoreBackground.png");
+        BufferedImage scoreBackgroundDown = ImageLoader.loadImage("/images/BackgroundDown.png");
+
         this.g.drawImage(scoreBackground, 700, 0, null);
+        this.g.drawImage(scoreBackgroundDown, 0, 460, null);
 
         String a = "Score: " + MainCharacter.score;
         this.g.drawString(a, 720, 50);
@@ -218,11 +215,22 @@ public class Game implements Runnable {
     }
 
     private void addingQuestionsContactZones() {
+        //question 1 contact zone
         questionsCollection.add(new Rectangle(100, 25, 48, 28));
+
+        //question 2 contact zone
         questionsCollection.add(new Rectangle(400, 250, 48, 28));
+
+        //question 3 contact zone
         questionsCollection.add(new Rectangle(600, 370, 48, 28));
+
+        //question 4 contact zone
         questionsCollection.add(new Rectangle(200, 350, 48, 28));
+
+        //question 5 contact zone
         questionsCollection.add(new Rectangle(370, 430, 48, 28));
+
+        //question 6 contact zone
         questionsCollection.add(new Rectangle(50, 120, 48, 28));
     }
 
