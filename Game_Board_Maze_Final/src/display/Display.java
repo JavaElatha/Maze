@@ -31,7 +31,6 @@ public class Display extends Canvas {
         createFrame();
     }
 
-    // class Canvas is public because we need to yoy from other classes
     public Canvas getCanvas() {
         return this.canvas;
     }
@@ -52,6 +51,6 @@ public class Display extends Canvas {
         this.inputHandler = new InputHandler(this);
         frame.addKeyListener(inputHandler);
         frame.add(canvas);
-        frame.pack(); //packet all
+        frame.pack();
     }
 }
